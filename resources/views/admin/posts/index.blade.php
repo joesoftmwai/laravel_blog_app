@@ -2,11 +2,17 @@
 
 @section('content')
 
+    @if(Session::has('added_user'))
+        <div class="alert alert-success">{{session('added_user')}}</div>
+    @endif
+
+
     <div class="panel panel-primary">
         <div class="panel-heading">
             <h2 class="panel-title">Posts</h2>
         </div>
         <div class="panel-body">
+            <div class="table-responsive">
             <table class="table table-hover table-striped table-bordered">
                 <thead>
                   <tr>
@@ -29,7 +35,7 @@
                                   <img src="{{$post->photo ? $post->photo->file : 'http://placeholder.it'}}" alt="" height="60" width="100">
                               </td>
                               <td>{{$post->user->name}}</td>
-                              <td>{{$post->category_id}}</td>
+                              <td>{{$post->category ? $post->category->name : 'Uncategorised'}}</td>
                               <td>{{$post->title}}</td>
                               <td>{{$post->body}}</td>
                               <td>{{$post->created_at->diffForHumans()}}</td>
@@ -39,6 +45,7 @@
                       @endif
                 </tbody>
               </table>
+            </div>
         </div>
     </div>
 
